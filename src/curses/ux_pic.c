@@ -97,7 +97,7 @@ bool unix_init_pictures (void)
   dotpos = strrchr(basename, '.');
   namelen = (dotpos ? dotpos - basename : strlen(basename));
   sprintf(filename, "%.*sgraphics/%.*s.mg1",
-          basename - f_setup.story_name, f_setup.story_name, namelen, basename);
+          (int)(basename - f_setup.story_name), f_setup.story_name, namelen, basename);
 
   do {
     int i, entry_size, flags, x_scale, y_scale;
@@ -346,4 +346,5 @@ int os_peek_colour (void)
   } else {
     return (inch() & A_REVERSE) ? h_default_foreground : h_default_background;
   }
+  return 0;
 }

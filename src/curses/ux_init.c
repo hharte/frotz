@@ -49,6 +49,8 @@
 #include "ux_frotz.h"
 #include "ux_blorb.h"
 
+int ux_init_blorb(void);
+
 f_setup_t f_setup;
 u_setup_t u_setup;
 
@@ -285,7 +287,7 @@ void os_process_arguments (int argc, char *argv[])
     f_setup.story_name = strdup(basename(argv[optind]));
 
     /* Now strip off the extension. */
-    p = rindex(f_setup.story_name, '.');
+    p = strrchr(f_setup.story_name, '.');
     if ((p != NULL) &&
         ((strcmp(p,EXT_BLORB2) == 0) ||
          (strcmp(p,EXT_BLORB3) == 0) ||
@@ -554,6 +556,7 @@ int os_random_seed (void)
 }/* os_random_seed */
 
 
+#if !defined(ANDROID)
 /*
  * os_path_open
  *
@@ -595,6 +598,7 @@ FILE *os_path_open(const char *name, const char *mode)
 	}
 	return NULL;	/* give up */
 } /* os_path_open() */
+#endif /* !defined(ANDROID) */
 
 /*
  * os_load_story
@@ -623,6 +627,7 @@ FILE *os_load_story(void)
 }
 
 
+#if !defined(ANDROID)
 /*
  * pathopen
  *
@@ -656,7 +661,7 @@ FILE *pathopen(const char *name, const char *p, const char *mode, char *fullname
 	}
 	return NULL;
 } /* FILE *pathopen() */
-
+#endif /* !defined(ANDROID) */
 
 /*
  * getconfig

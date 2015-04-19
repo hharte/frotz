@@ -34,9 +34,12 @@
 #include <time.h>
 
 #include <unistd.h>
+#ifndef ANDROID
 #include <ctype.h>
-
-
+#else
+#include <curses.h>
+#include "ux_frotz.h"
+#endif
 /*
  * os_path_open
  *
